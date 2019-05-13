@@ -1,4 +1,4 @@
-#atoi
+#atoi Runtime: 40 ms, faster than 99.30% of Python3
 class Solution:
     def myAtoi(self, str: str) -> int:
         if not str:
