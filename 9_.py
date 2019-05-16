@@ -14,6 +14,28 @@ class Solution:
         if(half == x or half//10 == x):
             return True
         return False
+    
+    #Regular Expression Matching
+    def isMatch(self, s: str, p: str) -> bool:
+        results = {}
+        def dp(i,j):
+            if (i,j) not in results:
+                if j == len(p):
+                    result = i == len(s)
+                else:
+                    firstMatch = i < len(s) and p[j] in {s[i],'.'}
+                    if(j+1 < len(p) and p[j+1]=='*'):
+                        result = dp(i,j+2) or (firstMatch and dp(i+1,j))
+                    else:
+                        result = firstMatch and dp(i+1,j+1)
+                results[i,j] = result
+            return results[i,j]
+        return dp(0,0)
+
+        
+            
+
+
 
 obj = Solution()
-print(obj.isPalindrome(21120))      
+print(obj.isMatch("mississippi","mis*is*p*."))      
