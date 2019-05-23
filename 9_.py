@@ -15,7 +15,7 @@ class Solution:
             return True
         return False
     
-    #Regular Expression Matching
+    #10.Regular Expression Matching
     def isMatch(self, s: str, p: str) -> bool:
         results = {}
         def dp(i,j):
@@ -32,10 +32,33 @@ class Solution:
             return results[i,j]
         return dp(0,0)
 
-        
-            
+    def maxArea(self, height: List[int]) -> int: 
+        l = 0
+        r = len(height) - 1
+        maxArea = 0
+        while l < r:
+            maxArea = max(maxArea,(r-l) * min(height[l],height[r]))
+            if height[l] > height[r]:
+                 r-=1 
+            else: 
+                l +=1
+        return maxArea
+
+    def intToRoman(self, num: int) -> str:
+        romanNum = ["I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"]
+        numeral =  [1,4,5,9,10,40,50,90,100,400,500,900,1000]
+        roman = ""
+        i = len(numeral) - 1
+        while(num > 0):
+            if (num >= numeral[i]):
+                num -= numeral[i]
+                roman += romanNum[i]
+            else:
+                i -= 1
+        return roman
+
 
 
 
 obj = Solution()
-print(obj.isMatch("mississippi","mis*is*p*."))      
+print(obj.intToRoman(1992))      
